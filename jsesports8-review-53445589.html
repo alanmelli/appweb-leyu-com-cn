@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.2" />
+  <title>极速电竞 · 竞速新维度</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+      background: linear-gradient(145deg, #fbe9d2 0%, #f5d7b0 40%, #ecc59b 100%);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 2rem 1rem 3rem;
+      line-height: 1.6;
+      color: #2c241b;
+    }
+    .page-wrap {
+      max-width: 1100px;
+      width: 100%;
+    }
+    /* 白色卡片主容器 */
+    .card {
+      background: rgba(255, 249, 240, 0.85);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      border-radius: 48px 16px 48px 16px;
+      box-shadow: 0 18px 36px -10px rgba(110, 60, 30, 0.25), 0 4px 8px rgba(0,0,0,0.02);
+      padding: 2.8rem 2.4rem;
+      margin-bottom: 2.8rem;
+      transition: box-shadow 0.2s;
+      border: 1px solid rgba(255, 245, 230, 0.6);
+    }
+    .hero-card {
+      padding: 3rem 2.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-card::after {
+      content: "⚡";
+      font-size: 10rem;
+      opacity: 0.06;
+      position: absolute;
+      right: -10px;
+      bottom: -30px;
+      transform: rotate(15deg);
+      pointer-events: none;
+    }
+    h1 {
+      font-size: 2.8rem;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      color: #422f1e;
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+    h1 small {
+      font-size: 1.1rem;
+      font-weight: 400;
+      opacity: 0.65;
+      letter-spacing: 0.08em;
+      margin-left: 0.6rem;
+    }
+    .hero-sub {
+      font-size: 1.4rem;
+      color: #6f4e2e;
+      margin-bottom: 1.2rem;
+      border-left: 5px solid #cc9f6b;
+      padding-left: 1.2rem;
+      font-weight: 360;
+    }
+    .hero-desc {
+      font-size: 1.08rem;
+      max-width: 680px;
+      color: #3d2f21;
+      margin-top: 1.2rem;
+    }
+    .hero-desc a {
+      color: #b2642a;
+      text-decoration: none;
+      font-weight: 500;
+      border-bottom: 1px dashed #b2642a;
+    }
+    .hero-desc a:hover {
+      background: #fceae0;
+    }
+
+    /* 二级标题 */
+    h2 {
+      font-size: 1.9rem;
+      font-weight: 500;
+      letter-spacing: -0.01em;
+      color: #442f1c;
+      margin-bottom: 1.6rem;
+      position: relative;
+      display: inline-block;
+    }
+    h2:after {
+      content: '';
+      display: block;
+      width: 48px;
+      height: 4px;
+      background: #e0b88a;
+      border-radius: 8px;
+      margin-top: 6px;
+    }
+
+    /* 优势网格 */
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 1.8rem 1.2rem;
+      margin: 2rem 0 0.8rem;
+    }
+    .feature-item {
+      background: rgba(252, 240, 224, 0.5);
+      border-radius: 28px 8px 28px 8px;
+      padding: 1.6rem 1.2rem 1.2rem;
+      border: 1px solid #eedbc4;
+      transition: 0.2s;
+    }
+    .feature-item:hover {
+      background: #f7e7d3;
+      border-color: #cfaa81;
+    }
+    .feature-item .emoji-big {
+      font-size: 2.2rem;
+      display: block;
+      margin-bottom: 0.4rem;
+    }
+    .feature-item p {
+      font-weight: 420;
+      color: #3d2b18;
+    }
+    .feature-item .sub {
+      font-size: 0.9rem;
+      opacity: 0.75;
+      margin-top: 0.2rem;
+    }
+
+    /* 说明区/场景 */
+    .scenario-wrap {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      margin: 1.5rem 0 0.2rem;
+    }
+    .scenario-col {
+      flex: 1 1 160px;
+      min-width: 140px;
+    }
+    .scenario-col h3 {
+      font-weight: 500;
+      font-size: 1.2rem;
+      color: #543d26;
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .scenario-col p {
+      color: #3b2d1d;
+      margin-bottom: 0.6rem;
+      font-size: 0.98rem;
+    }
+    .highlight-link {
+      color: #9b5e2b;
+      font-weight: 460;
+      text-decoration: none;
+      border-bottom: 1px dotted #b97f4a;
+      transition: 0.15s;
+    }
+    .highlight-link:hover {
+      background: #ecdcc9;
+      border-bottom-style: solid;
+    }
+
+    /* FAQ 摘要 */
+    .faq-summary {
+      background: #f7ede2;
+      padding: 1.6rem 1.8rem;
+      border-radius: 30px 10px 30px 10px;
+      margin: 2rem 0 0.8rem;
+      border-left: 6px solid #cf9f6b;
+    }
+    .faq-summary details {
+      margin: 0.8rem 0;
+      font-size: 0.98rem;
+    }
+    .faq-summary summary {
+      font-weight: 520;
+      cursor: pointer;
+      color: #3b2b1a;
+      padding: 0.2rem 0;
+      list-style: "▸  ";
+    }
+    .faq-summary details[open] summary {
+      list-style: "▾  ";
+    }
+    .faq-summary p {
+      padding-left: 1.6rem;
+      color: #3d2d1b;
+      margin: 0.3rem 0 0.6rem;
+    }
+
+    /* 底部链接行 */
+    .footer-links {
+      margin-top: 0.6rem;
+      padding: 1.4rem 0.6rem 0.2rem;
+      border-top: 2px solid #e7cfb5;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 0.8rem;
+    }
+    .footer-links a {
+      color: #6a4a2a;
+      text-decoration: none;
+      border-bottom: 1px solid #dbbd9e;
+      padding-bottom: 2px;
+      font-weight: 420;
+    }
+    .footer-links a:hover {
+      color: #3a2b18;
+      border-color: #a16938;
+    }
+
+    .tagline {
+      opacity: 0.7;
+      font-size: 0.95rem;
+      letter-spacing: 0.02em;
+    }
+
+    /* 响应式 */
+    @media (max-width: 640px) {
+      body { padding: 1.2rem 0.6rem; }
+      .card { padding: 1.6rem 1.2rem; border-radius: 32px 10px 32px 10px; }
+      .hero-card { padding: 2rem 1.2rem; }
+      h1 { font-size: 2rem; flex-wrap: wrap; }
+      h1 small { font-size: 0.9rem; margin-left: 0; }
+      .hero-sub { font-size: 1.1rem; }
+      .features-grid { gap: 1rem; }
+      .faq-summary { padding: 1.2rem; }
+    }
+  </style>
+</head>
+<body>
+<div class="page-wrap">
+
+  <!-- hero 区 -->
+  <div class="card hero-card">
+    <h1>
+      ⚡ 极速电竞
+      <small>· 反应 · 节奏 · 进化</small>
+    </h1>
+    <div class="hero-sub">低延迟不只是数字，是竞技状态的延伸</div>
+    <div class="hero-desc">
+      在电竞世界里，毫秒的差距往往定义胜负。所谓“极速”，并不仅是点击速度，而是从神经传递到屏幕反馈的完整闭环。对于许多玩家来说，<a href="https://jsesports8.com">极速电竞</a>代表的是一种更敏锐的竞技理解：把硬件潜力、操作习惯与游戏机制压榨到极限。
+    </div>
+  </div>
+
+  <!-- 优势区 (知识向) -->
+  <div class="card">
+    <h2>⏱ 拆解“极速”的三个层次</h2>
+    <div class="features-grid">
+      <div class="feature-item">
+        <span class="emoji-big">🧠</span>
+        <p>预判神经</p>
+        <div class="sub">基于局势的先行决策，缩减反应分支时间</div>
+      </div>
+      <div class="feature-item">
+        <span class="emoji-big">🖱️</span>
+        <p>操控同步</p>
+        <div class="sub">外设与指尖形成低惯量配合，减少机械延迟</div>
+      </div>
+      <div class="feature-item">
+        <span class="emoji-big">📡</span>
+        <p>网络韧性</p>
+        <div class="sub">稳定且低抖动的数据通道，保障操作映射</div>
+      </div>
+      <div class="feature-item">
+        <span class="emoji-big">🔄</span>
+        <p>节奏循环</p>
+        <div class="sub">个人节奏与游戏内在 tick 的适应博弈</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 说明区：从主题展开 -->
+  <div class="card">
+    <h2>🎯 从竞技场景理解“快速”</h2>
+    <div class="scenario-wrap">
+      <div class="scenario-col">
+        <h3>🔹 即时决策</h3>
+        <p>FPS 中的对枪、RTS 的运营节点、格斗游戏的确反窗口——每个选择都在极短时间窗内完成。训练方向：压缩认知负荷，让判断接近本能。</p>
+      </div>
+      <div class="scenario-col">
+        <h3>🔹 操作连贯性</h3>
+        <p>连招、滑铲射击、快速切屏……操作序列的流畅度往往比单次手速更重要。极速是“连续帧”的无缝衔接。</p>
+      </div>
+      <div class="scenario-col">
+        <h3>🔹 信息过滤</h3>
+        <p>高节奏对局里，视野内 80% 的信息可能是干扰。快速筛选关键线索（小地图、声音、血量）是一种元技能。</p>
+      </div>
+    </div>
+    <p style="margin-top: 1.2rem; font-size: 0.96rem; color: #4e3925;">
+      许多玩家在探索这些方向时，会参考 <a href="https://jsesports8.com" class="highlight-link">极速电竞</a> 所整理的社区思路与数据解读，从更底层的视角调整训练方法。
+    </p>
+  </div>
+
+  <!-- FAQ 摘要 + 提示 -->
+  <div class="card">
+    <h2>❓ 关于“极速”的常见疑问</h2>
+    <div class="faq-summary">
+      <details>
+        <summary>极速电竞只追求手速吗？</summary>
+        <p>不完全是。手速（APM / 点击频率）只是外在表现。更重要的往往是“有效决策密度”——在单位时间内做出正确选择的次数。盲目堆手速可能破坏节奏。</p>
+      </details>
+      <details>
+        <summary>硬件提升对极速的帮助有多大？</summary>
+        <p>高刷新率显示器、低延迟外设确实能减少物理瓶颈，但边际效益递减。当硬件延迟低于人类感知阈值（约 10-15ms）后，技术意识提升空间更大。</p>
+      </details>
+      <details>
+        <summary>怎样训练“极速”感更有效？</summary>
+        <p>推荐分模块练习：A. 目标切换训练（如 Aim Lab） B. 复盘压缩决策时间 C. 自定义对局刻意提速。避免长时间无目的 Rank。</p>
+      </details>
+      <details>
+        <summary>极速电竞适合所有游戏类型吗？</summary>
+        <p>核心思路通用，但表现侧重不同：格斗游戏强调确认速度，MOBA 侧重地图决策节奏，FPS 混合索敌与跟枪。可针对主玩项目微调。</p>
+      </details>
+    </div>
+    <p style="margin: 1.2rem 0 0.2rem; font-style: italic; color: #5b402b;">
+      ⚡ 一个容易被忽略的事实：极速状态其实是一种“放松的专注”——过度紧张反而减慢反应。调整心态也是提速的一环。
+    </p>
+  </div>
+
+  <!-- 底部链接区 -->
+  <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 1rem 0.5rem; padding: 0.4rem 0.2rem;">
+    <div class="tagline">
+      <span style="background: #dbbd9e40; padding: 0.25rem 0.8rem; border-radius: 30px;">⚡ 竞速 · 不止于快</span>
+    </div>
+    <div class="footer-links" style="border-top: none; padding-top: 0;">
+      <a href="https://jsesports8.com">极速电竞</a>
+      <span style="opacity:0.3;">·</span>
+      <a href="#">节奏实验室</a>
+      <span style="opacity:0.3;">·</span>
+      <a href="#">延迟分析</a>
+      <span style="opacity:0.3;">·</span>
+      <a href="#">场景模拟</a>
+    </div>
+  </div>
+
+  <!-- 极简说明：知识型收尾 -->
+  <p style="margin-top: 2rem; text-align: center; font-size: 0.85rem; opacity: 0.5; letter-spacing: 0.03em; color: #3f2e1b;">
+    内容基于竞技认知整理 · 技术与意识共同构成极速边界
+  </p>
+</div>
+</body>
+</html>
