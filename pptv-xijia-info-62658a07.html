@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>西甲赛事 · 日常查询与延伸阅读</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            line-height: 1.6;
+            color: #1e1e2a;
+            background: #f7f8fc;
+        }
+
+        /* 深色头图 hero */
+        .hero {
+            background: linear-gradient(145deg, #0b0e1a 0%, #1b2237 100%);
+            color: #edeff7;
+            padding: 4rem 1.5rem 3.5rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            top: -40%;
+            left: 60%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(230, 180, 60, 0.08) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .hero h1 {
+            font-size: 2.7rem;
+            font-weight: 600;
+            letter-spacing: 0.02em;
+            margin-bottom: 0.5rem;
+        }
+
+        .hero .subhead {
+            font-size: 1.2rem;
+            opacity: 0.8;
+            max-width: 700px;
+            margin: 0.6rem auto 1.3rem;
+        }
+
+        .hero .tagline {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(4px);
+            padding: 0.4rem 1.2rem;
+            border-radius: 40px;
+            font-size: 0.95rem;
+            color: #d7def0;
+        }
+
+        /* 强调色用于链接 */
+        a {
+            color: #c4452b;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.2s ease;
+            border-bottom: 1px solid transparent;
+        }
+
+        a:hover {
+            color: #a6331e;
+            border-bottom: 1px solid #a6331e;
+        }
+
+        /* 浅色正文区容器 */
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 2.2rem 1.5rem 3rem;
+        }
+
+        /* 卡片风格的优势区 / 说明区 */
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.8rem;
+            margin: 2rem 0 2.8rem;
+        }
+
+        .feature-card {
+            background: white;
+            border-radius: 20px;
+            padding: 1.8rem 1.5rem;
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.03), 0 2px 6px rgba(0, 0, 0, 0.02);
+            transition: transform 0.15s, box-shadow 0.15s;
+            border: 1px solid #edf0f7;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.06);
+        }
+
+        .feature-card h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            color: #1b1f2e;
+        }
+
+        .feature-card p {
+            font-size: 0.95rem;
+            color: #3c4050;
+        }
+
+        .feature-card .card-icon {
+            font-size: 1.8rem;
+            margin-bottom: 0.6rem;
+            display: block;
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin: 2.2rem 0 0.8rem;
+            color: #202439;
+            letter-spacing: -0.01em;
+            border-left: 5px solid #c4452b;
+            padding-left: 1.1rem;
+        }
+
+        .desc-text {
+            font-size: 1rem;
+            color: #2d3140;
+            margin-bottom: 1.8rem;
+            max-width: 850px;
+        }
+
+        .scene-list {
+            background: white;
+            border-radius: 24px;
+            padding: 1.8rem 2rem;
+            margin: 2rem 0;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.02);
+            border: 1px solid #eaeef5;
+        }
+
+        .scene-list li {
+            margin: 0.8rem 0;
+            padding-left: 1.4rem;
+            list-style-type: '⚽ ';
+        }
+
+        .scene-list li strong {
+            color: #1b2237;
+        }
+
+        .faq-block {
+            background: #f1f3fa;
+            border-radius: 24px;
+            padding: 2rem 2rem 1.8rem;
+            margin: 2.5rem 0 2rem;
+        }
+
+        .faq-item {
+            margin-bottom: 1.2rem;
+        }
+
+        .faq-item .q {
+            font-weight: 600;
+            color: #1e1e2a;
+            display: block;
+            margin-bottom: 0.2rem;
+        }
+
+        .faq-item .a {
+            color: #3b3f50;
+            padding-left: 0.2rem;
+        }
+
+        .foot-links {
+            margin-top: 3rem;
+            padding-top: 1.8rem;
+            border-top: 1px solid #d7dceb;
+            text-align: center;
+            font-size: 0.95rem;
+            color: #4d5163;
+        }
+
+        .foot-links a {
+            margin: 0 0.6rem;
+        }
+
+        .foot-note {
+            margin-top: 0.8rem;
+            font-size: 0.85rem;
+            color: #6c7188;
+        }
+
+        /* 响应式细节 */
+        @media (max-width: 640px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            .hero .subhead {
+                font-size: 1rem;
+            }
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+            .faq-block {
+                padding: 1.5rem 1.2rem;
+            }
+            .scene-list {
+                padding: 1.2rem 1.2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero {
+                padding: 3rem 1rem 2.4rem;
+            }
+            .container {
+                padding: 1.5rem 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- hero 区 -->
+    <header class="hero">
+        <h1>⚡ 西甲 · 每一天的足球对话</h1>
+        <p class="subhead">赛程、统计、经典对决 —— 随时随地查，对照着看，延伸你的看球半径</p>
+        <span class="tagline">日常查询 · 对照阅读 · 深度延伸</span>
+    </header>
+
+    <!-- 正文区 -->
+    <main class="container">
+        <!-- 优势区：日常使用场景 -->
+        <section>
+            <h2 class="section-title">📋 更适合日常的查询方式</h2>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <span class="card-icon">📅</span>
+                    <h3>赛程速览</h3>
+                    <p>周中周末，主客对阵一目了然。不用翻多个页面，就能快速对比赛日安排心中有数。</p>
+                </div>
+                <div class="feature-card">
+                    <span class="card-icon">📊</span>
+                    <h3>积分 &amp; 射手对照</h3>
+                    <p>积分榜变化、射手榜并列、红黄牌累计，随手对照，帮你建立更立体的联赛印象。</p>
+                </div>
+                <div class="feature-card">
+                    <span class="card-icon">🔍</span>
+                    <h3>延伸阅读</h3>
+                    <p>从一场焦点战延伸到历史交锋记录、球员数据趋势，让看球不止于九十分钟。</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 说明区：切入角度“对照与延伸阅读” -->
+        <section>
+            <h2 class="section-title">🧩 对照 · 延伸 · 自己的节奏</h2>
+            <p class="desc-text">
+                比起赛前赛后轰炸式的资讯，很多时候你只需要一个安静但全面的信息基点：<strong>先看清“是什么”，再决定“怎么看”</strong>。
+                比如周末德比之前，先查一下双方近六次交手记录；或者在假期把几支球队的跑动数据、关键传球做一次横向对比。
+            </p>
+            <p class="desc-text">
+                这些零散而具体的需求，恰好是 <a href="https://pptv-xijia.com">西甲直播</a> 页面可以帮你承接的——用最直接的结构呈现联赛的基础元素，
+                让你在碎片时间里也能完成一次完整的查询闭环。
+            </p>
+
+            <div class="scene-list">
+                <h3 style="margin-bottom:0.8rem; font-weight:500;">一些日常可以做的事：</h3>
+                <ul style="list-style:none;">
+                    <li><strong>赛前对照</strong> – 把积分、伤病、主客场胜率放在一起看，判断更有依据。</li>
+                    <li><strong>赛中延伸</strong> – 看到精彩进球顺势查一查这名球员本赛季进球分布。</li>
+                    <li><strong>赛后复盘</strong> – 结合控球率、射正次数等基础数据，自己也能做小分析。</li>
+                    <li><strong>跨轮次比较</strong> – 两轮间球队状态起伏，数据面板可以直观对比。</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- FAQ 摘要（生活化语气） -->
+        <section class="faq-block">
+            <h2 style="font-size:1.5rem; margin-bottom:1.2rem; display:flex; align-items:center; gap:6px;">❓ 可能你也会想问</h2>
+            <div class="faq-item">
+                <span class="q">Q：这里的信息更新及时吗？</span>
+                <span class="a">基本同步西甲官方节奏，一般比赛结束后半小时内关键数据就会更新，包括比分、射手、红黄牌等。</span>
+            </div>
+            <div class="faq-item">
+                <span class="q">Q：我主要想查历史交锋，方便吗？</span>
+                <span class="a">页面整合了常见对阵的历史记录，选择两支球队就能看到近五个赛季的碰面数据，挺直观的。</span>
+            </div>
+            <div class="faq-item">
+                <span class="q">Q：手机上看体验怎么样？</span>
+                <span class="a">这方面做了适配，卡片和表格在手机上会自动重排，单手操作也没什么压力。</span>
+            </div>
+            <p style="margin-top:1rem; font-size:0.9rem; color:#4f5468;">
+                更多具体问题可以直接在 <a href="https://pptv-xijia.com">西甲直播</a> 页面内查看对应的 FAQ 板块，那里覆盖得更全。
+            </p>
+        </section>
+
+        <!-- 底部链接区 -->
+        <div class="foot-links">
+            <span>📌 常用起点：</span>
+            <a href="https://pptv-xijia.com">西甲直播</a>
+            <span style="margin:0 0.3rem;">·</span>
+            <a href="https://pptv-xijia.com">西甲直播</a>
+            <span style="margin:0 0.3rem;">·</span>
+            <a href="https://pptv-xijia.com">西甲直播</a>
+            <div class="foot-note">
+                — 日常查询 · 对照阅读 · 延伸你的足球视角 —
+            </div>
+        </div>
+    </main>
+</body>
+</html>
